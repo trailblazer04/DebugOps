@@ -1,0 +1,69 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Error {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String   @db.Text
+  excerpt     String?
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  subcategory String?
+  tags        Tag[]
+  views       Int      @default(0)
+  likes       Int      @default(0)
+  helpful     Int      @default(0)
+  notHelpful  Int      @default(0)
+  status      Status   @default(PUBLISHED)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([categoryId])
+  @@index([slug])
+  @@index([status])
+}
+
+model Category {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  slug        String  @unique
+  description String?
+  icon        String?
+  color       String?
+  errors      Error[]
+  createdAt   DateTime @default(now())
+}
+
+model Tag {
+  id     String  @id @default(cuid())
+  name   String  @unique
+  slug   String  @unique
+  errors Error[]
+}
+
+model Analytics {
+  id         String   @id @default(cuid())
+  errorId    String
+  action     String   // view, like, helpful, search
+  userAgent  String?
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+  
+  @@index([errorId])
+  @@index([action])
+  @@index([createdAt])
+}
+
+enum Status {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
