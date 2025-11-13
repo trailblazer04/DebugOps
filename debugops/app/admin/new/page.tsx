@@ -1,14 +1,11 @@
-// app/admin/new/page.tsx
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Save, Eye, X } from 'lucide-react'
 
-// This is a simple admin panel without authentication
-// For production, add NextAuth.js for security
-
 export default function NewErrorPage() {
   const router = useRouter()
+  const [categories, setCategories] = useState<any[]>([])
   const [formData, setFormData] = useState({
     title: '',
     categoryId: '',
@@ -21,12 +18,15 @@ export default function NewErrorPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [preview, setPreview] = useState(false)
 
-  const categories = [
-    { id: '1', name: 'DevOps' },
-    { id: '2', name: 'Programming' },
-    { id: '3', name: 'Cybersecurity' },
-    { id: '4', name: 'Linux' },
-  ]
+  useEffect(() => {
+    fetch('/api/errors')
+      .then(res => res.json())
+      .then(data => {
+        const uniqueCats = Array.from(new Set(data.map((e: any) => e.category.name)))
+          .map((name, i) => ({ id: String(i + 1), name }))
+        setCategories(uniqueCats)
+      })
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -135,10 +135,8 @@ How to avoid this error in the future:
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
-          {/* Form */}
           <div className="space-y-6">
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Title */}
               <div>
                 <label className="block text-sm font-medium mb-2">
                   Error Title *
@@ -153,7 +151,6 @@ How to avoid this error in the future:
                 />
               </div>
 
-              {/* Category */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">
@@ -188,7 +185,6 @@ How to avoid this error in the future:
                 </div>
               </div>
 
-              {/* Excerpt */}
               <div>
                 <label className="block text-sm font-medium mb-2">
                   Short Description
@@ -202,7 +198,6 @@ How to avoid this error in the future:
                 />
               </div>
 
-              {/* Tags */}
               <div>
                 <label className="block text-sm font-medium mb-2">
                   Tags (comma-separated)
@@ -216,7 +211,6 @@ How to avoid this error in the future:
                 />
               </div>
 
-              {/* Content */}
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <label className="block text-sm font-medium">
@@ -240,7 +234,6 @@ How to avoid this error in the future:
                 />
               </div>
 
-              {/* Actions */}
               <div className="flex gap-4">
                 <button
                   type="submit"
@@ -262,7 +255,6 @@ How to avoid this error in the future:
             </form>
           </div>
 
-          {/* Preview */}
           {preview && (
             <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
               <h3 className="text-xl font-semibold mb-4">Preview</h3>
@@ -287,44 +279,6 @@ How to avoid this error in the future:
               </div>
             </div>
           )}
-        </div>
-
-        {/* Markdown Help */}
-        <div className="mt-8 bg-slate-800/50 border border-slate-700 rounded-lg p-6">
-          <h3 className="text-lg font-semibold mb-4">Markdown Quick Reference</h3>
-          <div className="grid md:grid-cols-2 gap-4 text-sm">
-            <div>
-              <h4 className="font-semibold mb-2">Headers</h4>
-              <code className="block bg-slate-900 p-2 rounded">
-                # H1<br />
-                ## H2<br />
-                ### H3
-              </code>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Code Blocks</h4>
-              <code className="block bg-slate-900 p-2 rounded">
-                ```bash<br />
-                command here<br />
-                ```
-              </code>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Lists</h4>
-              <code className="block bg-slate-900 p-2 rounded">
-                - Item 1<br />
-                - Item 2<br />
-                1. First<br />
-                2. Second
-              </code>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Inline Code</h4>
-              <code className="block bg-slate-900 p-2 rounded">
-                Use `code` for inline
-              </code>
-            </div>
-          </div>
         </div>
       </div>
     </div>

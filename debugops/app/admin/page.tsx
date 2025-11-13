@@ -1,4 +1,3 @@
-// app/admin/page.tsx
 import Link from 'next/link'
 import { Plus, Edit, Trash2, Eye } from 'lucide-react'
 import { prisma } from '@/lib/prisma'
@@ -36,7 +35,6 @@ export default async function AdminDashboard() {
           </Link>
         </div>
 
-        {/* Stats */}
         <div className="grid md:grid-cols-4 gap-6 mb-8">
           <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
             <div className="text-2xl font-bold mb-1">{errors.length}</div>
@@ -62,7 +60,6 @@ export default async function AdminDashboard() {
           </div>
         </div>
 
-        {/* Error List */}
         <div className="bg-slate-800/50 border border-slate-700 rounded-lg overflow-hidden">
           <table className="w-full">
             <thead className="bg-slate-900/50">

@@ -9,14 +9,48 @@ const config: Config = {
   theme: {
     extend: {
       typography: {
-        invert: {
+        DEFAULT: {
           css: {
-            '--tw-prose-body': 'rgb(203 213 225)',
-            '--tw-prose-headings': 'rgb(241 245 249)',
-            '--tw-prose-links': 'rgb(96 165 250)',
-            '--tw-prose-bold': 'rgb(241 245 249)',
-            '--tw-prose-code': 'rgb(203 213 225)',
-            '--tw-prose-pre-bg': 'rgb(15 23 42)',
+            maxWidth: 'none',
+            color: 'rgb(203 213 225)',
+            a: {
+              color: 'rgb(96 165 250)',
+              '&:hover': {
+                color: 'rgb(147 197 253)',
+              },
+            },
+            h1: {
+              color: 'rgb(241 245 249)',
+            },
+            h2: {
+              color: 'rgb(241 245 249)',
+            },
+            h3: {
+              color: 'rgb(241 245 249)',
+            },
+            h4: {
+              color: 'rgb(241 245 249)',
+            },
+            strong: {
+              color: 'rgb(241 245 249)',
+            },
+            code: {
+              color: 'rgb(203 213 225)',
+              backgroundColor: 'rgb(15 23 42)',
+              padding: '0.25rem 0.5rem',
+              borderRadius: '0.25rem',
+              fontWeight: '400',
+            },
+            'code::before': {
+              content: '""',
+            },
+            'code::after': {
+              content: '""',
+            },
+            pre: {
+              backgroundColor: 'rgb(15 23 42)',
+              color: 'rgb(203 213 225)',
+            },
           },
         },
       },

@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -32,9 +31,9 @@ model Error {
 }
 
 model Category {
-  id          String  @id @default(cuid())
-  name        String  @unique
-  slug        String  @unique
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
   description String?
   icon        String?
   color       String?
@@ -52,7 +51,7 @@ model Tag {
 model Analytics {
   id         String   @id @default(cuid())
   errorId    String
-  action     String   // view, like, helpful, search
+  action     String
   userAgent  String?
   ipAddress  String?
   createdAt  DateTime @default(now())

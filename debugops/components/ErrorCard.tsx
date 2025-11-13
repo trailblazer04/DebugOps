@@ -1,4 +1,3 @@
-// components/ErrorCard.tsx
 import Link from 'next/link'
 import { Eye, ThumbsUp, Clock, ChevronRight } from 'lucide-react'
 import { format } from 'date-fns'

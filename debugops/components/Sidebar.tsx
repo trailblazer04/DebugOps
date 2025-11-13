@@ -1,5 +1,4 @@
-// components/Sidebar.tsx
-import { BookOpen, Clock, Code, Shield, Wrench, Terminal } from 'lucide-react'
+import { BookOpen, Code, Shield, Wrench, Terminal } from 'lucide-react'
 
 interface Category {
   id: string
@@ -10,16 +9,15 @@ interface Category {
 }
 
 const iconMap: Record<string, any> = {
-  Code,
-  Shield,
-  Wrench,
-  Terminal,
+  DevOps: Wrench,
+  Programming: Code,
+  Cybersecurity: Shield,
+  Linux: Terminal,
 }
 
 export default function Sidebar({ categories }: { categories: Category[] }) {
   return (
     <div className="space-y-6">
-      {/* Categories */}
       <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
         <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
           <BookOpen className="w-5 h-5 text-blue-400" />
@@ -47,7 +45,6 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
         </div>
       </div>
 
-      {/* Newsletter CTA */}
       <div className="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg p-6">
         <h3 className="text-lg font-semibold mb-2">Weekly Error Digest</h3>
         <p className="text-sm text-blue-100 mb-4">
@@ -69,7 +66,6 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
         </form>
       </div>
 
-      {/* Stats */}
       <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-6">
         <h3 className="text-lg font-semibold mb-4">Database Stats</h3>
         <div className="space-y-3 text-sm">

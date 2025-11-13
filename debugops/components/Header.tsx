@@ -1,4 +1,3 @@
-// components/Header.tsx
 import Link from 'next/link'
 import { Terminal } from 'lucide-react'
 
@@ -22,11 +21,8 @@ export default function Header() {
             <Link href="/" className="text-slate-300 hover:text-white transition">
               Home
             </Link>
-            <Link href="/blog" className="text-slate-300 hover:text-white transition">
-              Blog
-            </Link>
-            <Link href="/about" className="text-slate-300 hover:text-white transition">
-              About
+            <Link href="/admin" className="text-slate-300 hover:text-white transition">
+              Admin
             </Link>
           </nav>
         </div>
