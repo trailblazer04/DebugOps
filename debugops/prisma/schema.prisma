@@ -66,3 +66,18 @@ enum Status {
   PUBLISHED
   ARCHIVED
 }
+
+model BlogPost {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  excerpt   String
+  content   String   @db.Text
+  author    String
+  date      DateTime
+  readTime  String
+  category  String
+  featured  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

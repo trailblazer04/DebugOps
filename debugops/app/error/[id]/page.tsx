@@ -34,7 +34,7 @@ async function getError(slug: string) {
 }
 
 const components = {
-  code: ({ className, children, ...props }: any) => {
+  code: ({ className, children, ...props }: { className?: string; children?: React.ReactNode; [key: string]: unknown }) => {
     const match = /language-(\w+)/.exec(className || '')
     return match ? (
       <SyntaxHighlighter
@@ -46,7 +46,7 @@ const components = {
         {String(children).replace(/\n$/, '')}
       </SyntaxHighlighter>
     ) : (
-      <code className={`${className} bg-slate-800 px-2 py-1 rounded text-sm`} {...props}>
+      <code className={`${className || ''} bg-slate-800 px-2 py-1 rounded text-sm`} {...props}>
         {children}
       </code>
     )

@@ -3,9 +3,14 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Save, Eye, X } from 'lucide-react'
 
+interface Category {
+  id: string
+  name: string
+}
+
 export default function NewErrorPage() {
   const router = useRouter()
-  const [categories, setCategories] = useState<any[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
   const [formData, setFormData] = useState({
     title: '',
     categoryId: '',
@@ -21,11 +26,12 @@ export default function NewErrorPage() {
   useEffect(() => {
     fetch('/api/errors')
       .then(res => res.json())
-      .then(data => {
-        const uniqueCats = Array.from(new Set(data.map((e: any) => e.category.name)))
-          .map((name, i) => ({ id: String(i + 1), name }))
+      .then((data: { category: { name: string } }[]) => {
+        const uniqueCats = Array.from(new Set(data.map((e) => e.category.name)))
+          .map((name, i) => ({ id: String(i + 1), name: name as string }))
         setCategories(uniqueCats)
       })
+      .catch(err => console.error('Failed to fetch categories:', err))
   }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {

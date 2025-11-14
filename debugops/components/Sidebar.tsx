@@ -1,4 +1,4 @@
-import { BookOpen, Code, Shield, Wrench, Terminal } from 'lucide-react'
+import { BookOpen, Code, Shield, Wrench, Terminal, LucideIcon } from 'lucide-react'
 
 interface Category {
   id: string
@@ -8,7 +8,7 @@ interface Category {
   _count: { errors: number }
 }
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, LucideIcon> = {
   DevOps: Wrench,
   Programming: Code,
   Cybersecurity: Shield,
